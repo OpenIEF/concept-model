@@ -1,0 +1,251 @@
+{
+  "id": "ief-concept-model",
+  "version": "0.3.0-draft.1",
+  "scope": "concepts-and-relationships",
+  "minimalism": "Framework-wide principle; implementations expose only applicable concepts and transmit only information necessary to preserve meaning, trust, and recoverability.",
+  "layers": [
+    "Semantic",
+    "Interoperability",
+    "Conformance",
+    "Implementation"
+  ],
+  "concepts": [
+    {
+      "id": "entity",
+      "name": "Entity",
+      "definition": "Anything with a distinguishable identity in an environment."
+    },
+    {
+      "id": "capability",
+      "name": "Capability",
+      "definition": "An ability an entity can provide under stated conditions; not permission or current availability."
+    },
+    {
+      "id": "state",
+      "name": "State",
+      "definition": "An attributed description of an entity's condition at a stated time, identified as reported, observed, or predicted."
+    },
+    {
+      "id": "intent",
+      "name": "Intent",
+      "definition": "An actor's stated aim or plan for future behaviour; not a prediction, permission, or commitment."
+    },
+    {
+      "id": "action",
+      "name": "Action",
+      "definition": "An operation that can be requested, with an identifiable target and possible outcome."
+    },
+    {
+      "id": "event",
+      "name": "Event",
+      "definition": "Something reported to have occurred, including action progress, results, and faults."
+    },
+    {
+      "id": "resource",
+      "name": "Resource",
+      "definition": "An entity or capacity that can be used, reserved, or allocated under an applicable authority."
+    },
+    {
+      "id": "relation",
+      "name": "Relation",
+      "definition": "A typed association between identified entities, such as *located in*, *connected to*, or *provided by*."
+    },
+    {
+      "id": "service",
+      "name": "Service",
+      "definition": "An offered activity or outcome, independently of how or by whom it is fulfilled."
+    }
+  ],
+  "roles": [
+    {
+      "id": "actor",
+      "definition": "An Entity that can act or bear operational responsibility."
+    },
+    {
+      "id": "space",
+      "definition": "An Entity representing a place or spatial scope; not automatically an Actor."
+    },
+    {
+      "id": "provider",
+      "definition": "An Actor responsible for an offered Service."
+    },
+    {
+      "id": "performer",
+      "definition": "An Actor carrying out a particular instance of work."
+    },
+    {
+      "id": "representative",
+      "definition": "An Actor acting for an Entity only within established authority."
+    }
+  ],
+  "relations": [
+    {
+      "id": "hasCapability",
+      "from": "entity",
+      "to": "capability"
+    },
+    {
+      "id": "hasState",
+      "from": "entity",
+      "to": "state"
+    },
+    {
+      "id": "expressesIntent",
+      "from": "actor",
+      "to": "intent"
+    },
+    {
+      "id": "requestsAction",
+      "from": "actor",
+      "to": "action"
+    },
+    {
+      "id": "performsAction",
+      "from": "actor",
+      "to": "action"
+    },
+    {
+      "id": "reportsEvent",
+      "from": "actor",
+      "to": "event"
+    },
+    {
+      "id": "locatedIn",
+      "from": "entity",
+      "to": "space"
+    },
+    {
+      "id": "usesResource",
+      "from": "actor",
+      "to": "resource"
+    },
+    {
+      "id": "offersService",
+      "from": "provider",
+      "to": "service"
+    },
+    {
+      "id": "fulfilsService",
+      "from": "performer",
+      "to": "service"
+    },
+    {
+      "id": "representedBy",
+      "from": "entity",
+      "to": "representative"
+    }
+  ],
+  "areas": [
+    {
+      "id": "infrastructure",
+      "name": "Infrastructure",
+      "responsibility": "Shared facilities, operating conditions, availability, and capacity.",
+      "boundary": "Does not imply a central infrastructure controller."
+    },
+    {
+      "id": "spatial",
+      "name": "Spatial",
+      "responsibility": "Places, connectivity, positions, reference frames, and spatial restrictions.",
+      "boundary": "A location or route does not itself confer access or a reservation."
+    },
+    {
+      "id": "robot",
+      "name": "Robot",
+      "responsibility": "A native robotic entity, capabilities, reported state, intended behaviour, and actions.",
+      "boundary": "Does not depend on VDA5050, MassRobotics, or a specific fleet manager."
+    },
+    {
+      "id": "device",
+      "name": "Device",
+      "responsibility": "Physical equipment, sensors, actuators, and represented or passive devices.",
+      "boundary": "Does not assume that every device is remotely controllable."
+    },
+    {
+      "id": "service",
+      "name": "Service",
+      "responsibility": "Offered outcomes, accountable providers, requests, and human, machine, software, or hybrid fulfilment.",
+      "boundary": "An offering is not a performer or execution instance."
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "responsibility": "Identity, authentication, delegated authority, and authorisation across interactions.",
+      "boundary": "Permission is not a guarantee of physical safety or task completion."
+    }
+  ],
+  "interactionPatterns": [
+    {
+      "id": "read",
+      "name": "Read",
+      "meaning": "Request information about an identified subject or capability."
+    },
+    {
+      "id": "publish",
+      "name": "Publish",
+      "meaning": "Make attributed state or intent available to authorised consumers."
+    },
+    {
+      "id": "invoke",
+      "name": "Invoke",
+      "meaning": "Request an identified action or service operation."
+    },
+    {
+      "id": "notify",
+      "name": "Notify",
+      "meaning": "Report an event, decision, progress, or outcome."
+    }
+  ],
+  "invariants": [
+    {
+      "id": "state-provenance",
+      "meaning": "Reported State is attributable and retains applicable freshness or validity context; last arrival alone is not authority."
+    },
+    {
+      "id": "capability-is-not-permission",
+      "meaning": "Capability does not imply authorisation, availability, or operational safety."
+    },
+    {
+      "id": "intent-is-not-commitment",
+      "meaning": "Aim, prediction, permission, and accepted reservation are not equivalent."
+    },
+    {
+      "id": "request-is-not-completion",
+      "meaning": "Receipt, acceptance, execution, and successful completion remain distinguishable."
+    },
+    {
+      "id": "service-provider-versus-performer",
+      "meaning": "Provider acceptance does not imply a human performer has accepted an assignment."
+    },
+    {
+      "id": "adapter-semantic-preservation",
+      "meaning": "Mappings do not invent missing information, authority, control, or outcomes."
+    },
+    {
+      "id": "scoped-participation",
+      "meaning": "Implementations need only support concepts relevant to their declared roles and capabilities."
+    },
+    {
+      "id": "authenticated-interactions",
+      "meaning": "Live interactions require authenticated origins and applicable authorisation; declared identity is not proof."
+    },
+    {
+      "id": "recoverable-compression",
+      "meaning": "Context-dependent updates require agreement on context and a means of recovery after loss of synchronisation."
+    }
+  ],
+  "adapterModel": {
+    "sourceDefinedObjectsAreNotNative": true,
+    "mappingInformation": [
+      "source-standard-and-revision",
+      "direction",
+      "identity-correspondence",
+      "supported-concepts",
+      "assumptions",
+      "semantic-losses"
+    ],
+    "examples": [
+      "VDA5050",
+      "MassRobotics AMR Interoperability"
+    ]
+  }
+}
